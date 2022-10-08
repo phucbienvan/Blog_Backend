@@ -22,3 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('categories', CategoryController::class);
 Route::resource('blogs', BlogController::class);
+Route::get('blogs-by-category', [BlogController::class, 'getBlogByCategory']);
+Route::get('blogs-by-user', [BlogController::class, 'getBlogByUser']);
+Route::get('blogs-by-outstanding', [BlogController::class, 'getBlogsByOutstanding']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+});
