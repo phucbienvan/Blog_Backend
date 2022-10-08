@@ -15,10 +15,13 @@ class BlogResource extends BaseResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'category_id' => $this->category_id,
+            'user_id' => $this->user_id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => $this->image_url,
+            'view' => $this->view,
         ];
     }
 }

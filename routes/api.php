@@ -27,3 +27,11 @@ Route::resource('blogs', BlogController::class);
 Route::group(['prefix' => 'users'], function () {
     Route::post('register', [UserController::class, 'register']);
 });
+
+Route::get('blogs-by-category', [BlogController::class, 'getBlogByCategory']);
+Route::get('blogs-by-user', [BlogController::class, 'getBlogByUser']);
+Route::get('blogs-by-outstanding', [BlogController::class, 'getBlogsByOutstanding']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+});

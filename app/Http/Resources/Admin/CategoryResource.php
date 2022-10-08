@@ -17,7 +17,7 @@ class CategoryResource extends BaseResource
         return [
             'name' => $this->name,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => $this->image_url,
         ];
     }
 }
