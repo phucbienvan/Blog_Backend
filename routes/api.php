@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\BlogController;
 use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('categories', CategoryController::class);
 Route::resource('blogs', BlogController::class);
+
+Route::group(['prefix' => 'users'], function () {
+    Route::post('register', [UserController::class, 'register']);
+});
