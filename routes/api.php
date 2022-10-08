@@ -26,4 +26,5 @@ Route::resource('blogs', BlogController::class);
 
 Route::group(['prefix' => 'users'], function () {
     Route::post('register', [UserController::class, 'register']);
+    Route::post('login', [UserController::class, 'login']);
 });

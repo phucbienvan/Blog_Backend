@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\LoginRequest;
 use Illuminate\Http\Request;
 use App\Services\Api\UserService;
 use App\Http\Requests\Api\RegisterRequest;
@@ -11,12 +12,34 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends BaseController
 {
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
+    }
+
+    public function login(LoginRequest $request)
+    {
+        try {
+            $user = $this->userService->findUserByEmail($request->get('email'));
+            if (!$user) {
+                return $this->responseErrors('user not found');
+            }
+
+            if (!Hash::check($request->get('password'), $user->password)) {
+                return $this->responseErrors('password not match');
+            }
+
+            return response()->json([
+                'code' => 200,
+                'access_token' => $user->access_token
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function register(RegisterRequest $request)

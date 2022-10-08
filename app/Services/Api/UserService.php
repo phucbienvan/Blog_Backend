@@ -29,4 +29,12 @@ class UserService extends BaseService
     {
         $user->sendEmailVerificationNotification();
     }
+
+    public function findUserByEmail($email)
+    {
+        return $this->model
+            ->whereNotNull('email_verified_at')
+            ->where('email', $email)
+            ->first();
+    }
 }
