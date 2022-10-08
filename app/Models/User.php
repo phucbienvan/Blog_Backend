@@ -21,6 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'avatar',
+        'role',
         'password',
     ];
 
@@ -51,5 +53,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function routeNotificationForMail($notification)
     {
         return $this->email;
+    }
+
+    public function getAccessTokenAttribute()
+    {
+        return $this->createToken('authUser')->plainTextToken;
     }
 }
